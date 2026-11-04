@@ -1,0 +1,8 @@
+{
+  "calculator.py": {
+    "screens": ["home"]
+  },
+  "return_to_home_screen.py": {
+    "screens": ["fallback"]
+  }
+}

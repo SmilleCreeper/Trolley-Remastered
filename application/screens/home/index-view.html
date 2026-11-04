@@ -1,0 +1,40 @@
+<div id="home-layout">
+  <div id="home-card">
+    <header id="home-header">
+      <div id="home-title">Trolley Remastered</div>
+    </header>
+
+    <section id="calculator" aria-label="Calculator">
+      <div id="calculator-expression" aria-live="polite"></div>
+      <output id="calculator-display" aria-live="polite">0</output>
+
+      <div id="calculator-keypad">
+        <button type="button" class="calc-key calc-key-function" data-action="clear">AC</button>
+        <button type="button" class="calc-key calc-key-function" data-action="backspace" aria-label="Backspace">&#9003;</button>
+        <button type="button" class="calc-key calc-key-function" data-action="sign" aria-label="Toggle sign">&#177;</button>
+        <button type="button" class="calc-key calc-key-operator" data-operator="/" aria-label="Divide">&#247;</button>
+
+        <button type="button" class="calc-key" data-digit="7">7</button>
+        <button type="button" class="calc-key" data-digit="8">8</button>
+        <button type="button" class="calc-key" data-digit="9">9</button>
+        <button type="button" class="calc-key calc-key-operator" data-operator="*" aria-label="Multiply">&#215;</button>
+
+        <button type="button" class="calc-key" data-digit="4">4</button>
+        <button type="button" class="calc-key" data-digit="5">5</button>
+        <button type="button" class="calc-key" data-digit="6">6</button>
+        <button type="button" class="calc-key calc-key-operator" data-operator="-" aria-label="Subtract">&#8722;</button>
+
+        <button type="button" class="calc-key" data-digit="1">1</button>
+        <button type="button" class="calc-key" data-digit="2">2</button>
+        <button type="button" class="calc-key" data-digit="3">3</button>
+        <button type="button" class="calc-key calc-key-operator" data-operator="+" aria-label="Add">+</button>
+
+        <button type="button" class="calc-key calc-key-zero" data-digit="0">0</button>
+        <button type="button" class="calc-key" data-action="decimal">.</button>
+        <button type="button" class="calc-key calc-key-equals" data-action="equals" aria-label="Equals">=</button>
+      </div>
+
+      <div id="calculator-status" role="status" aria-live="polite">Try 1 &#247; 0 to see the fallback screen.</div>
+    </section>
+  </div>
+</div>

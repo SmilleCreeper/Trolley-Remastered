@@ -1,0 +1,12 @@
+{
+  "name": "Trolley Remastered",
+  "defaultScreen": "home",
+  "fallbackScreen": "fallback",
+  "pythonRequirements": [
+    {
+      "name": "NumPy",
+      "id": "numpy==2.5.4",
+      "index-url": null
+    }
+  ]
+}

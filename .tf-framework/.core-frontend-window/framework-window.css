@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --titlebar-background: #1a1a1a;
+  --titlebar-minimize-button-text: #fff;
+  --titlebar-minimize-button-hover-background: #333;
+  --titlebar-close-button-text: #fff;
+  --titlebar-close-button-hover-background: #e81123;
+  --progress-text: #fff;
+  --progress-fill: #2a6b6b;
+  --progress-fill-increase: #388e3c;
+  --progress-fill-decrease: #d32f2f;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e1e;
+  color: #fff;
+  overflow: hidden;
+}
+
+#titlebar {
+  position: relative;
+  height: 32px;
+  background: var(--titlebar-background);
+  display: flex;
+  align-items: center;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+#titlebar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--progress-fill);
+  opacity: 0;
+  z-index: 0;
+  -webkit-app-region: drag;
+  transition: width 0.15s ease, background 0.3s ease, opacity 0.3s ease;
+}
+
+#titlebar-status {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  opacity: 0;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--progress-text);
+  -webkit-app-region: drag;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+#titlebar-buttons {
+  position: relative;
+  display: flex;
+  height: 100%;
+  margin-left: auto;
+  z-index: 1;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  width: 46px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--titlebar-minimize-button-text);
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titlebar-btn:hover {
+  background: var(--titlebar-minimize-button-hover-background);
+}
+
+#btn-close {
+  color: var(--titlebar-close-button-text);
+}
+
+#btn-close:hover {
+  background: var(--titlebar-close-button-hover-background);
+}
+
+#screen-container {
+  height: calc(100vh - 32px);
+  overflow: hidden;
+}

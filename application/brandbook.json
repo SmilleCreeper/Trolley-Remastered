@@ -1,0 +1,19 @@
+{
+  "titlebar": {
+    "background": "#1a1a1a",
+    "minimizeButton": {
+      "text": "#fff",
+      "hoverBackground": "#333"
+    },
+    "closeButton": {
+      "text": "#fff",
+      "hoverBackground": "#e81123"
+    }
+  },
+  "progressBar": {
+    "text": "#fff",
+    "fill": "#2a6b6b",
+    "increaseFill": "#388e3c",
+    "decreaseFill": "#d32f2f"
+  }
+}

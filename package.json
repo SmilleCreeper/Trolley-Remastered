@@ -1,0 +1,55 @@
+{
+  "name": "trolley-remastered",
+  "version": "1.0.0",
+  "description": "Trolley desktop application framework with embedded Python",
+  "main": "entry-point.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "node distribution/utils/build.mjs",
+    "build:dir": "node distribution/utils/build.mjs --dir",
+    "rebuild": "node distribution/utils/build.mjs --rebuild-addon"
+  },
+  "keywords": [
+    "electron",
+    "python",
+    "desktop"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-calls-python": "^1.13.0"
+  },
+  "devDependencies": {
+    "electron": "^44.9.0",
+    "electron-builder": "^26.0.12",
+    "node-gyp": "^12.4.0"
+  },
+  "build": {
+    "appId": "com.trolley.remastered",
+    "productName": "Trolley Remastered",
+    "directories": {
+      "output": "distribution/build-results"
+    },
+    "files": [
+      "entry-point.js",
+      "package.json",
+      ".tf-framework/**/*",
+      "application/**/*"
+    ],
+    "asar": false,
+    "npmRebuild": false,
+    "afterPack": "distribution/utils/after-pack.js",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "application/icon.png",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
