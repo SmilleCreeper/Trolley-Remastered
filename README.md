@@ -8,6 +8,14 @@ Trolley is the template I wish Electron came with by default: a frameless window
 
 ---
 
+## Screenshots
+
+![Screenshot](screenshots/trolley_remastered_screenshot_1.png)
+
+![Screenshot](screenshots/trolley_remastered_screenshot_2.png)
+
+---
+
 ## What it does
 
 **Embedded Python model** — CPython runs inside the Electron process through `node-calls-python`. A controller calls `context.python.run("action", payload)`; the framework imports `application/model/python/action.py` and calls `run(payload)` on the embedded interpreter. There is no Python HTTP server, no heartbeat, no handshake, no Python job queue, and no preview service in the middle.
