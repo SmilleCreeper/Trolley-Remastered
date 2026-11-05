@@ -398,6 +398,16 @@ Fewer moving parts, no ports, no heartbeats, no orphan processes, no zombies. If
 
 ---
 
+## Quick-Patches
+
+This section is for quick patches made after the initial release, when issues surface in real use. Each entry records the problem, its cause, and the fix.
+
+### Patch 1 — Python handler lifetime after screen navigation
+
+Every screen mount imported the same Python action file again, and in the Windows build of `node-calls-python` those imports produced the same handler ID for the same module. When the previous screen's handler was garbage-collected, its finalizer removed that shared ID from the native handler table, after which actions failed with `Cannot find handler: @nodecallspython-...` and the screen's Python became unusable. The fix in `.tf-framework/.core-backend-engine/javascript-to-python-execution.js` imports each Python action file once per renderer and caches the handler for the renderer's lifetime, so remounts reuse it and a stale finalizer cannot remove a live handler. Failed imports are evicted so they can be retried.
+
+---
+
 ## License & Ethics
 
 **Applicable license**

@@ -27,6 +27,31 @@ function normalizeActionName(file) {
   return fileName;
 }
 
+// node-calls-python derives a module handler id from the Python module pointer
+// and a process-wide random value. Importing the same file again can mint the
+// same id, and when the older JavaScript handler is garbage collected its
+// finalizer removes that shared id from the native handler table. Cache one
+// handler per module file for the lifetime of the renderer so screen remounts
+// reuse it instead of invalidating each other.
+const pythonModules = new Map();
+
+function importPythonModule(modulePath) {
+  const cached = pythonModules.get(modulePath);
+
+  if (cached) return cached;
+
+  const importPromise = py.import(modulePath).catch((error) => {
+    if (pythonModules.get(modulePath) === importPromise) {
+      pythonModules.delete(modulePath);
+    }
+
+    throw error;
+  });
+
+  pythonModules.set(modulePath, importPromise);
+  return importPromise;
+}
+
 function createJavaScriptToPythonExecution({
   modelDirectory,
   progress,
@@ -36,8 +61,6 @@ function createJavaScriptToPythonExecution({
   if (typeof modelDirectory !== 'string' || modelDirectory.trim() === '') {
     throw new TypeError('Python actions require a model directory.');
   }
-
-  const modules = new Map();
 
   function createEventHandler(onNavigate) {
     return function handleEvent(event, data) {
@@ -96,21 +119,7 @@ function createJavaScriptToPythonExecution({
     let result;
 
     try {
-      let module = modules.get(modulePath);
-
-      if (!module) {
-        const importPromise = py.import(modulePath);
-        modules.set(modulePath, importPromise);
-
-        try {
-          module = await importPromise;
-        } catch (error) {
-          modules.delete(modulePath);
-          throw error;
-        }
-      } else {
-        module = await module;
-      }
+      const module = await importPythonModule(modulePath);
 
       result = await py.call(
         module,
